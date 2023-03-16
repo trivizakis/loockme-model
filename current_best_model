@@ -1,0 +1,5 @@
+{"architecture":"densenet121",
+"neurons":[512],
+"h5_name":"weights-chpoint-04-0.92.h5",
+"acc":0.912,
+"auc":0.991}
