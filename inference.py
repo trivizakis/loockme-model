@@ -124,10 +124,7 @@ class DL_Greek_Locations:
         hypes["best_weights"] = best_model["h5_name"]
         hypes["chkp_dir"] = model_path        
         
-        
-        value = inference(hypes, image_path, classes)
-        
-        return value
+        return inference(hypes, image_path, classes)
 
     class CustomThread(Thread):
         def __init__(self, group=None, target=None, name=None,
