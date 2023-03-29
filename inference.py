@@ -10,6 +10,8 @@ import cv2
 import json
 import numpy as np
 
+from threading import Thread
+
 #from math import floor
 import tensorflow as tf
 import tensorflow.keras.backend as K
@@ -106,8 +108,10 @@ def inference(hypes, image_path, classes):
     
     return classes[index]
     
-class DL_Greek_Locations:
-    def get_label(image_path):
+
+
+class DL_Greek_Locations:    
+    def get_label(self, image_path):
         best_model = get_hypes("models/current_best_model")
         
         model_path = "models/"+best_model["architecture"]+"/"+str(best_model["neurons"][0])+"/"    
@@ -120,4 +124,23 @@ class DL_Greek_Locations:
         hypes["best_weights"] = best_model["h5_name"]
         hypes["chkp_dir"] = model_path        
         
-        return inference(hypes, image_path, classes)
+        
+        value = inference(hypes, image_path, classes)
+        print("Print values from inside:: "+str(value))
+        
+        return value
+
+    class CustomThread(Thread):
+        def __init__(self, group=None, target=None, name=None,
+                 args=(), kwargs={}, Verbose=None):
+            Thread.__init__(self, group, target, name, args, kwargs)
+            self._return = None
+
+        def run(self):
+            if self._target is not None:
+                self._return = self._target(*self._args,
+                                                    **self._kwargs)
+        def join(self, *args):
+            Thread.join(self, *args)
+            return self._return   
+    
