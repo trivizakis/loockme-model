@@ -126,7 +126,6 @@ class DL_Greek_Locations:
         
         
         value = inference(hypes, image_path, classes)
-        print("Print values from inside:: "+str(value))
         
         return value
 
